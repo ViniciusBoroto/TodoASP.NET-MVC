@@ -17,4 +17,8 @@ public class TodoController : Controller
         //var contatos = _context.TodoTasks.AsNoTracking().ToList();
         return View();
     }
+    public IActionResult Create()
+    {
+        return View();
+    }
 }
