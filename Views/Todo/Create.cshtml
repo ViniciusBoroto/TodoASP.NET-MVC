@@ -6,6 +6,18 @@
 }
 
 <h1>Criar nova tarefa</h1>
-<form>
-
+<form method="post">
+    <div class="mb-3">
+        <label for="TitleInput" class="form-label">Título
+            <input type="text" class="form-control" id="TitleInput" name="TitleInput" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
