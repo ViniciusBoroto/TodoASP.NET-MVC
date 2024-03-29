@@ -14,8 +14,8 @@ public class TodoController : Controller
 
     public IActionResult Index()
     {
-        //var contatos = _context.TodoTasks.AsNoTracking().ToList();
-        return View();
+        var tasks = _context.TodoTasks.AsNoTracking().ToList();
+        return View(tasks);
     }
     public IActionResult Create()
     {
