@@ -1,16 +1,27 @@
-﻿@{
+﻿@model IEnumerable<ToDo.Models.TodoTask>
+@{
     ViewData["Title"] = "Tarefas";
 }
-<h1>
+<h1 class="text-center">
     Tarefas
 </h1>
-<p >
+<p class="text-center">
     <a class="btn btn-primary" asp-action="Create">Criar nova tarefa</a>
 </p>
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">Tarefa1</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
+@foreach (var task in Model)
+{
+    <div class="card  mx-auto my-2 text-center" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(model => task.Title)</h5>
+            <p class="card-text">@Html.DisplayFor(model => task.Description)</p>
+            @if (task.Finished)
+            {
+                <p class="text-success">Finished</p>
+            }
+            else
+            {
+                <p class="text-primary">To Do</p>
+            }
+        </div>
     </div>
-</div>
+}
