@@ -1,23 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model TodoTask
     ViewData["Title"] = "Criar nova tarefa";
 }
 
 <h1>Criar nova tarefa</h1>
 <form asp-action="Create">
+
     <div class="mb-3">
-        <label name="Title" class="form-label">Título</label>
+        <label asp-for="Title" class="form-label">Título</label>
             <input type="text" class="form-control" name="Title" aria-describedby="emailHelp">
     </div>
+
     <div class="mb-3">
-        <label name="Description" class="form-label">Descrição</label>
-        <textarea name="Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label asp-for="Description" class="form-label">Descrição</label>
+
+        <textarea asp-for="Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
+
     <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" name="Finished">
-        <label class="form-check-label" name="Finished">Finalizada</label>
+        <input type="checkbox" class="form-check-input" asp-for="Finished">
+
+        <label class="form-check-label" asp-for="Finished">Finalizada</label>
     </div>
+
     <button type="submit" class="btn btn-primary">Enviar</button>
+
 </form>
