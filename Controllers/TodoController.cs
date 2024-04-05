@@ -58,4 +58,25 @@ public class TodoController : Controller
         _context.SaveChanges();
         return RedirectToAction(nameof(Index));
     }
+    public IActionResult Delete(int id) 
+    {
+        var task = _context.TodoTasks.Find(id);
+        if (task is null)
+            return RedirectToAction(nameof(Index));
+
+        return View(task);
+    }
+
+    [HttpPost]
+    public IActionResult Delete(TodoTask task)
+    {
+        var taskDB = _context.TodoTasks.Find(task.Id);
+        if (taskDB is null)
+            return RedirectToAction(nameof(Index));
+
+        _context.TodoTasks.Remove(taskDB);
+        _context.SaveChanges();
+
+        return RedirectToAction(nameof(Index));
+    }
 }

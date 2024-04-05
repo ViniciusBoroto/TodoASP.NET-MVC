@@ -1,0 +1,29 @@
+﻿@model TodoTask
+@{
+    ViewData["Title"] = "Deletar tarefa";
+}
+<h1 style="color: red;">Deseja realmente deletar essa tarefa? Essa operação é irreversível</h1>
+
+<div class="card  mx-auto my-2 text-center" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title</h5>
+        <p class="card-text">@Model.Description</p>
+        <div>
+            @if (Model.Finished)
+            {
+                <span class="text-success">Finished</span>
+            }
+            else
+            {
+                <span class="text-primary">To Do</span>
+            }
+        </div>
+
+    </div>
+</div>
+<div class="d-flex justify-content-center">
+<form asp-action="Delete">
+    <a asp-action="Index" class="btn btn-outline-primary mx-2">Voltar</a>
+    <input type="submit" name="name" value="Deletar" class="btn btn-danger mx-2" />
+</form>
+</div>
