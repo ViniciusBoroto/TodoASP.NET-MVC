@@ -22,7 +22,6 @@ public class TodoController : Controller
     {
         return View();
     }
-
     [HttpPost]
     public IActionResult Create(TodoTask task)
     {
@@ -31,6 +30,6 @@ public class TodoController : Controller
             _context.TodoTasks.Add(task);
             _context.SaveChanges();
         }
-    return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(Index));
     }
 }
