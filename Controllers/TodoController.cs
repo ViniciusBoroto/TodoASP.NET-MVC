@@ -46,7 +46,7 @@ public class TodoController : Controller
         return View(task);
     }
 
-    [HttpPut]
+    [HttpPost]
     public IActionResult Edit(TodoTask task)
     {
         if (task is null) 
@@ -56,6 +56,6 @@ public class TodoController : Controller
         _context.Entry(task).State =
             Microsoft.EntityFrameworkCore.EntityState.Modified;
         _context.SaveChanges();
-        return View(task);
+        return RedirectToAction(nameof(Index));
     }
 }

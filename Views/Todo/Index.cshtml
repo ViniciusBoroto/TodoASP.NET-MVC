@@ -14,14 +14,18 @@
         <div class="card-body">
             <h5 class="card-title">@Html.DisplayFor(model => task.Title)</h5>
             <p class="card-text">@Html.DisplayFor(model => task.Description)</p>
-            @if (task.Finished)
-            {
-                <p class="text-success">Finished</p>
-            }
-            else
-            {
-                <p class="text-primary">To Do</p>
-            }
+            <div>
+                @if (task.Finished)
+                {
+                    <span class="text-success">Finished</span>
+                }
+                else
+                {
+                    <span class="text-primary">To Do</span>
+                }
+                <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-outline-secondary py-1 px-2 mx-1">Editar</a>
+            </div>
+
         </div>
     </div>
 }

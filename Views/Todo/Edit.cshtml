@@ -1,0 +1,35 @@
+﻿@model TodoTask
+@{
+    ViewData["Title"] = "Editar tarefa";
+}
+
+<h1>Editar tarefa</h1>
+<form asp-action="Edit">
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Título</label>
+        <input type="text" class="form-control" name="Title" aria-describedby="emailHelp" value="@Model.Title">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Descrição</label>
+
+        <textarea asp-for="Description" class="form-control" id="exampleFormControlTextarea1" rows="3" value="@Model.Description"></textarea>
+    </div>
+
+    <div class="mb-3 form-check">
+        @if (Model.Finished)
+        {
+        <input type="checkbox" class="form-check-input" asp-for="Finished" checked />           
+        }
+        else
+        {
+        <input type="checkbox" class="form-check-input" asp-for="Finished" />
+        }
+
+        <label class="form-check-label" asp-for="Finished">Finalizada</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+
+</form>
