@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToDo.Context;
+using ToDo.Models;
 
 namespace ToDo.Controllers;
 public class TodoController : Controller
@@ -20,5 +21,16 @@ public class TodoController : Controller
     public IActionResult Create()
     {
         return View();
+    }
+    [HttpPost]
+    public IActionResult Create(TodoTask task)
+    {
+        if (task != null)
+        {
+            _context.TodoTasks.Add(task);
+            _context.SaveChanges();
+        }
+
+        return RedirectToAction(nameof(Index));
     }
 }
