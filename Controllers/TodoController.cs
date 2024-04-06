@@ -15,10 +15,24 @@ public class TodoController : Controller
 
     public IActionResult Index()
     {
-        var tasks = _context.TodoTasks.AsNoTracking().ToList();
+        var tasksDB = _context.TodoTasks.ToList();
+        List<TodoTask>[] tasks = new List<TodoTask>[2];
+        tasks[0] = new List<TodoTask>();
+        tasks[1] = new List<TodoTask>();
+        foreach (var task in tasksDB)
+        {
+            if (task.Finished)
+            {
+                tasks[1].Add(task);
+            }
+            else
+            {
+                tasks[0].Add(task);
+            }
+        }
+        //return view(tasksdb);
         return View(tasks);
     }
-
     public IActionResult Create()
     {
         return View();

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ToDo.Models.TodoTask>
+﻿@model IEnumerable<ToDo.Models.TodoTask>[]
 @{
     ViewData["Title"] = "Tarefas";
 }
@@ -8,24 +8,44 @@
 <p class="text-center">
     <a class="btn btn-primary" asp-action="Create">Criar nova tarefa</a>
 </p>
-@foreach (var task in Model)
-{
-    <div class="card  mx-auto my-2 text-center" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">@Html.DisplayFor(model => task.Title)</h5>
-            <p class="card-text">@Html.DisplayFor(model => task.Description)</p>
-            <div>
-                @if (task.Finished)
+<div class="container py-3">
+    <div class="row gx-5">
+        <div class="col border-end">
+            <h2 class="text-center text-primary">To do</h2>
+            <div class="d-flex justify-content-between flex-wrap">
+                @foreach (var task in Model[0])
                 {
-                    <span class="text-success">Finished</span>
-                }
-                else
-                {
-                    <span class="text-primary">To Do</span>
-                }
-                <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-outline-secondary py-1 px-2 mx-1">Editar</a>
-            </div>
+                    <div class="card  mx-auto my-2 text-center border border-primary" style="width: 12rem;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@Html.DisplayFor(model => task.Title)</h5>
+                            <p class="card-text">@Html.DisplayFor(model => task.Description)</p>
+                            <div class="mt-auto">
+                                <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-outline-secondary py-1 px-2">Editar</a>
+                            </div>
 
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @* ===================================== *@
+        <div class="col border-start">
+            <h2 class="text-center text-success">Finalizadas</h2>
+            <div class="d-flex justify-content-between flex-wrap">
+                @foreach (var task in Model[1])
+                {
+                    <div class="card  mx-auto my-2 text-center border border-success" style="width: 12rem;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@Html.DisplayFor(model => task.Title)</h5>
+                            <p class="card-text">@Html.DisplayFor(model => task.Description)</p>
+                            <div class="mt-auto">
+                                <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-outline-secondary py-1 px-2 mx-1">Editar</a>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-}
+</div>
