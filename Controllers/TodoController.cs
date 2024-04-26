@@ -2,20 +2,21 @@
 using Microsoft.EntityFrameworkCore;
 using ToDo.Context;
 using ToDo.Models;
+using ToDo.Repositories;
 
 namespace ToDo.Controllers;
 public class TodoController : Controller
 {
-    private readonly TodoTaskContext _context;
+    private readonly ITodoTaskRepository _repository;
 
-    public TodoController(TodoTaskContext context)
+    public TodoController(ITodoTaskRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public IActionResult Index()
     {
-        var tasksDB = _context.TodoTasks.ToList();
+        var tasksDB = _repository.GetAll();
         List<TodoTask>[] tasks = new List<TodoTask>[2];
         tasks[0] = new List<TodoTask>();
         tasks[1] = new List<TodoTask>();
@@ -43,15 +44,14 @@ public class TodoController : Controller
     {
         if (task != null)
         {
-            _context.TodoTasks.Add(task);
-            _context.SaveChanges();
+            _repository.Add(task);
         }
         return RedirectToAction(nameof(Index));
     }
 
     public IActionResult Edit(int id)
     {
-        var task = _context.TodoTasks.Find(id);
+        var task = _repository.GetById(id);
         if (task is null)
         {
             return RedirectToAction(nameof(Index));
@@ -67,14 +67,14 @@ public class TodoController : Controller
         {
             return RedirectToAction(nameof(Index));
         }
-        _context.Entry(task).State =
-            Microsoft.EntityFrameworkCore.EntityState.Modified;
-        _context.SaveChanges();
+
+        _repository.Update(task);
+
         return RedirectToAction(nameof(Index));
     }
     public IActionResult Delete(int id) 
     {
-        var task = _context.TodoTasks.Find(id);
+        var task = _repository.GetById(id);
         if (task is null)
             return RedirectToAction(nameof(Index));
 
@@ -84,12 +84,11 @@ public class TodoController : Controller
     [HttpPost]
     public IActionResult Delete(TodoTask task)
     {
-        var taskDB = _context.TodoTasks.Find(task.Id);
+        var taskDB = _repository.GetById(task.Id);
         if (taskDB is null)
             return RedirectToAction(nameof(Index));
 
-        _context.TodoTasks.Remove(taskDB);
-        _context.SaveChanges();
+        _repository.Delete(taskDB.Id);
 
         return RedirectToAction(nameof(Index));
     }
